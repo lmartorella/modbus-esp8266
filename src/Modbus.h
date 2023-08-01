@@ -116,7 +116,7 @@ class Modbus {
             FC_READWRITE_REGS   = 0x17  // Read/Write Multiple registers
         };
         //Exception Codes
-        //Custom result codes used internally and for callbacks but never used for Modbus responce
+        //Custom result codes used internally and for callbacks but never used for Modbus response
         enum ResultCode {
             EX_SUCCESS              = 0x00, // Custom. No error
             EX_ILLEGAL_FUNCTION     = 0x01, // Function Code not Supported
@@ -256,7 +256,7 @@ class Modbus {
         uint16_t callback(TRegister* reg, uint16_t val, TCallback::CallbackType t);
         virtual TRegister* searchRegister(TAddress addr);
         void exceptionResponse(FunctionCode fn, ResultCode excode); // Fills _frame with response
-        void successResponce(TAddress startreg, uint16_t numoutputs, FunctionCode fn);  // Fills frame with response
+        void successResponse(TAddress startreg, uint16_t numoutputs, FunctionCode fn);  // Fills frame with response
         void slavePDU(uint8_t* frame);    //For Slave
         void masterPDU(uint8_t* frame, uint8_t* sourceFrame, TAddress startreg, uint8_t* output = nullptr);   //For Master
         // frame - data received form slave
