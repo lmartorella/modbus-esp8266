@@ -30,7 +30,7 @@ static inline uint16_t __swap_16(uint16_t num) { return (num >> 8) | (num << 8);
 #define ISTS_VAL(v) (v?0xFF00:0x0000)
 #define ISTS_BOOL(v) (v==0xFF00)
 
-// For depricated (v1.xx) onSet/onGet format compatibility
+// For deprecated (v1.xx) onSet/onGet format compatibility
 #define cbDefault nullptr
 
 struct TRegister;

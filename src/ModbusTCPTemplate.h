@@ -104,10 +104,10 @@ class ModbusTCPTemplate : public Modbus {
 	bool disconnect(IPAddress ip);
 	// ModbusTCP
 	void server(uint16_t port = 0);
-	// ModbusTCP depricated
-	inline void slave(uint16_t port = 0) { server(port); }	// Depricated
-	inline void master() { client(); }	// Depricated
-	inline void begin() { server(); }; 	// Depricated
+	// ModbusTCP deprecated
+	inline void slave(uint16_t port = 0) { server(port); }	// Deprecated
+	inline void master() { client(); }	// Deprecated
+	inline void begin() { server(); }; 	// Deprecated
 	void client();
 	void task();
 	void onConnect(cbModbusConnect cb = nullptr);
