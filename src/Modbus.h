@@ -177,7 +177,7 @@ class Modbus {
                 struct {
 		            uint8_t slaveId;
                     bool validFrame;
-                }
+                };
                 // For TCP
 		        struct {
 			        uint8_t unitId;
@@ -186,9 +186,9 @@ class Modbus {
 		        };
             };
             frame_arg_t(uint8_t _slaveId, bool _to_server = false, bool _validFrame = true) {
-                slaveId = s;
+                slaveId = _slaveId;
                 to_server = _to_server;
-                validFrame = _validFrame
+                validFrame = _validFrame;
             };
             frame_arg_t(uint8_t u, uint32_t a, uint16_t t, bool m = false) {
                 unitId = u;

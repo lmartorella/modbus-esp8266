@@ -270,7 +270,7 @@ void ModbusRTUTemplate::task() {
     uint16_t frameCrc = ((_frame[_len - 2] << 8) | _frame[_len - 1]); // Last two bytes = crc
     _len = _len - 2;    // Decrease by CRC 2 bytes
 	bool crcError = frameCrc != crc16(address, _frame, _len);
-	valid_frame &&= !crcError;
+	valid_frame = valid_frame && !crcError;
 	_reply = EX_PASSTHROUGH;
 	if (_cbRaw) {
 		if (!crcError || _cbRawIncludeCrcErrors) {
@@ -331,5 +331,5 @@ bool ModbusRTUTemplate::cleanup() {
 
 bool ModbusRTUTemplate::onRaw(cbRaw cb, bool includeCrcErrors) {
     _cbRawIncludeCrcErrors = includeCrcErrors;
-	return ModbusRTU::onRaw(cb);
+	return Modbus::onRaw(cb);
 }
