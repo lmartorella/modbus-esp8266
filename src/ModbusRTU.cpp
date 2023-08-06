@@ -155,6 +155,11 @@ bool ModbusRTUTemplate::rawSend(uint8_t slaveId, uint8_t* frame, uint8_t len) {
     _port->write(newCrc >> 8);	//Send CRC
     _port->write(newCrc & 0xFF);//Send CRC
     _port->flush();
+
+	while (_port->available() > 0) {
+		_port->read();
+	}
+
 #if defined(MODBUSRTU_REDE)
 	if (_txEnablePin >= 0 || _rxPin >= 0) {
 #if defined(MODBUSRTU_FLUSH_DELAY)
