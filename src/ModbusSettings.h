@@ -123,7 +123,7 @@ Specified in chars. That is 1 is means to add delay enough to send 1 char at cur
 */
 #define MODBUSRTU_FLUSH_DELAY 2
 
-#define MODBUSRTU_REDE_SWITCH_US 1000
+#define MODBUSRTU_REDE_SWITCH_US 2000
 
 #define MODBUSAPI_LEGACY
 #define MODBUSAPI_OPTIONAL
