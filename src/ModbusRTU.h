@@ -60,6 +60,15 @@ class ModbusRTUTemplate : public Modbus {
     public:
 		void setBaudrate(uint32_t baud = -1);
 		uint32_t calculateMinimumInterFrameTime(uint32_t baud, uint8_t char_bits = 11);
+
+		/**
+		 * This function sets the inter frame time. This time is the time that task() waits before considering that the frame being transmitted on the RS485 bus has finished.
+		 * If the interframe calculated by calculateMinimumInterFrameTime() is not enough, you can set the interframe time manually with this function. 
+		 * The time must be set in micro seconds. 
+		 * This is useful when you are receiving data as a slave and you notice that the slave is dividing a frame in two or more pieces (and obviously the CRC is failing on all pieces).
+		 * This is because it is detecting an interframe time in between bytes of the frame and thus it interprets one single frame as two or more frames.
+		 * In that case it is useful to be able to set a more "permissive" interframe time.
+		*/
 		void setInterFrameTime(uint32_t t_us);
 		uint32_t charSendTime(uint32_t baud, uint8_t char_bits = 11);
 		template <class T>
