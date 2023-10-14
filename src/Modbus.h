@@ -263,6 +263,11 @@ class Modbus {
         virtual TRegister* searchRegister(TAddress addr);
         void exceptionResponse(FunctionCode fn, ResultCode excode); // Fills _frame with response
         void successResponse(TAddress startreg, uint16_t numoutputs, FunctionCode fn);  // Fills frame with response
+        // Use `successResponse` instead
+        [[deprecated]]
+        void successResponce(TAddress startreg, uint16_t numoutputs, FunctionCode fn) {
+            successResponse(startreg, numoutputs, fn);
+        }
         void slavePDU(uint8_t* frame);    //For Slave
         void masterPDU(uint8_t* frame, uint8_t* sourceFrame, TAddress startreg, uint8_t* output = nullptr);   //For Master
         // frame - data received form slave

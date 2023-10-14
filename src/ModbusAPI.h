@@ -133,6 +133,19 @@ class ModbusAPI : public T {
 	uint16_t rawResponse(TYPEID ip, const uint8_t* data, uint16_t len, uint8_t unit = MODBUSIP_UNIT);
 	template <typename TYPEID>
 	uint16_t errorResponse(TYPEID ip, Modbus::FunctionCode fn, Modbus::ResultCode excode, uint8_t unit = MODBUSIP_UNIT);
+
+	// Use `rawResponse` instead
+	template <typename TYPEID>
+	[[deprecated]]
+	uint16_t rawResponce(TYPEID ip, const uint8_t* data, uint16_t len, uint8_t unit = MODBUSIP_UNIT) {
+		return rawResponse(ip, data, len, unit);
+	}
+	// Use `errorResponse` instead
+	template <typename TYPEID>
+	[[deprecated]]
+	uint16_t errorResponce(TYPEID ip, Modbus::FunctionCode fn, Modbus::ResultCode excode, uint8_t unit = MODBUSIP_UNIT) {
+		return errorResponce(ip, fn, excode, unit);
+	}
 };
 
 // FNAME	writeCoil, writeIsts, writeHreg, writeIreg
