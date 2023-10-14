@@ -71,13 +71,33 @@ class ModbusRTUTemplate : public Modbus {
 		*/
 		void setInterFrameTime(uint32_t t_us);
 		uint32_t charSendTime(uint32_t baud, uint8_t char_bits = 11);
+
+		// Use `ModbusRTUTxEnableMode` overload instead
+		template <class T>
+		[[deprecated]]
+		bool begin(T* port, int16_t txEnablePin = -1, bool txEnableDirect = true) {
+			return begin(port, txEnablePin, txEnableDirect ? TxEnableHigh : TxEnableLow);
+		}
 		template <class T>
 		bool begin(T* port, int16_t txEnablePin = -1, ModbusRTUTxEnableMode txEnableMode = TxEnableHigh);
+
 #if defined(MODBUSRTU_REDE)
+		// Use `ModbusRTUTxEnableMode` overload instead
+		template <class T>
+		[[deprecated]]
+		bool begin(T* port, int16_t txEnablePin, int16_t rxEnablePin, bool txEnableDirect) {
+			return begin(port, txEnablePin, rxEnablePin, txEnableDirect ? TxEnableHigh : TxEnableLow);
+		}
 		template <class T>
 		bool begin(T* port, int16_t txEnablePin, int16_t rxEnablePin, ModbusRTUTxEnableMode txEnableMode);
 #endif
+		// Use `ModbusRTUTxEnableMode` overload instead
+		[[deprecated]]
+		bool begin(Stream* port, int16_t txEnablePin = -1, bool txEnableDirect = true) {
+			return begin(port, txEnablePin, txEnableDirect ? TxEnableHigh : TxEnableLow);
+		}
 		bool begin(Stream* port, int16_t txEnablePin = -1, ModbusRTUTxEnableMode txEnableMode = TxEnableHigh);
+
         void task();
 		void client() { isMaster = true; };
 		inline void master() {client();}
