@@ -104,7 +104,9 @@ Otherwise IP addresses only must be used
 #define MODBUSRTU_BROADCAST 0
 #define MB_RESERVE 248
 #define MB_SERIAL_BUFFER 128
+#ifndef MODBUSRTU_TIMEOUT
 #define MODBUSRTU_TIMEOUT 1000
+#endif
 #define MODBUSRTU_MAX_READMS 100
 /*
 #define MODBUSRTU_REDE
