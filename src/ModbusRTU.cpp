@@ -106,7 +106,7 @@ void ModbusRTUTemplate::setInterFrameTime(uint32_t t_us) {
 bool ModbusRTUTemplate::begin(Stream* port, int16_t txEnablePin, ModbusRTUTxEnableMode txEnableMode) {
     _port = port;
     _t = 1750UL;
-#if defined(MODBUSRTU_FLUSH_DELAY)
+#if defined(MODBUSRTU_FLUSH_DELAY) || defined(MODBUSRTU_REDE_SWITCH_DELAY)
 	_t1 = charSendTime(0);
 #endif
     if (txEnablePin >= 0) {
@@ -133,12 +133,16 @@ bool ModbusRTUTemplate::rawSend(uint8_t slaveId, uint8_t* frame, uint8_t len) {
         	digitalWrite(_txEnablePin, _txEnableMode == TxEnableHigh ? HIGH : LOW);
 		if (_rxPin >= 0)
         	digitalWrite(_rxPin, _txEnableMode == TxEnableHigh ? HIGH : LOW);
-        delayMicroseconds(MODBUSRTU_REDE_SWITCH_US);
+#if defined(MODBUSRTU_REDE_SWITCH_DELAY)
+        delayMicroseconds(_t1 * MODBUSRTU_REDE_SWITCH_DELAY);
+#endif
 	}
 #else
     if (_txEnablePin >= 0) {
         digitalWrite(_txEnablePin, _txEnableMode == TxEnableHigh ? HIGH : LOW);
-        delayMicroseconds(MODBUSRTU_REDE_SWITCH_US);
+#if defined(MODBUSRTU_REDE_SWITCH_DELAY)
+        delayMicroseconds(_t1 * MODBUSRTU_REDE_SWITCH_DELAY);
+#endif
 	}
 #endif
 #if defined(ESP32)

@@ -32,7 +32,7 @@ class ModbusRTUTemplate : public Modbus {
 #endif
 		ModbusRTUTxEnableMode _txEnableMode = TxEnableHigh;	// Transmit control logic
 		uint32_t _t;	// inter-frame delay in uS
-#if defined(MODBUSRTU_FLUSH_DELAY)
+#if defined(MODBUSRTU_FLUSH_DELAY) || defined(MODBUSRTU_REDE_SWITCH_DELAY)
 		uint32_t _t1;	// char send time
 #endif
 		uint32_t t = 0;		// time sience last data byte arrived
@@ -119,7 +119,7 @@ bool ModbusRTUTemplate::begin(T* port, int16_t txEnablePin, ModbusRTUTxEnableMod
     baud = 9600;
     #endif
 	setInterFrameTime(calculateMinimumInterFrameTime(baud));
-#if defined(MODBUSRTU_FLUSH_DELAY)
+#if defined(MODBUSRTU_FLUSH_DELAY) || defined(MODBUSRTU_REDE_SWITCH_DELAY)
 	_t1 = charSendTime(baud);
 #endif
     _port = port;

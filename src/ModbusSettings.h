@@ -120,11 +120,17 @@ Enable using separate pins for RE DE
 
 /*
 #define MODBUSRTU_FLUSH_DELAY 1
-Set extra delay after serial buffer flush before changing RE/DE pin state.
+Set extra delay after serial buffer flush before de-asserting RE/DE pin state.
 Specified in chars. That is 1 is means to add delay enough to send 1 char at current port baudrate
 */
 
-#define MODBUSRTU_REDE_SWITCH_US 2000
+/*
+Set delay before asserting RE/DE pin state.
+Specified in chars. That is 1 is means to add delay enough to send 1 char at current port baudrate
+*/
+#ifndef MODBUSRTU_REDE_SWITCH_DELAY
+#define MODBUSRTU_REDE_SWITCH_DELAY 2.5
+#endif
 
 #define MODBUSAPI_LEGACY
 #define MODBUSAPI_OPTIONAL
